@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 13:53:58 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/05 17:03:15 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/05 18:43:07 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ size_t	ft_strlen(const char *str);
 void	ft_putchar(const char c);
 void	ft_putstr(const char *str);
 void	ft_putendl(const char *str);
-void	ft_select(int nb_list, char **list);
+void	ft_select();//int nb_list, char **list);
 
 #endif
