@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 13:37:15 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/06 17:05:04 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/07 13:36:33 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ void	ft_putendl(const char *str)
 	end_line = '\n';
 	ft_putstr(str);
 	ft_putchar(end_line);
+}
+
+int tputs_putchar(int c)
+{
+    write(1, &c, 1);
+    return (1);
 }
