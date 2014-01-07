@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 16:55:39 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/07 13:36:35 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/07 19:58:55 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_select(int nb_list, char **list)
 
 	if ((txt = getenv("TERM")) == NULL)
 		return (-1);
+	ft_bzero(buff_env, BUFF_SIZE);
 	if (tgetent(buff_env, txt) < 1)
 		return (-1);
 	//printf("%s\n",buff_env);
@@ -57,6 +58,7 @@ int	ft_select(int nb_list, char **list)
 		//txt = getenv("TERM");
 		height = tgetnum ("li");
 		width = tgetnum ("co");
+		ft_bzero(buffer, 3);
 		read(0, buffer, 3);
 		//printf("%d - %d - %d\n", buffer[0], buffer[1], buffer[2]);
 		//printf("%d - %d\n", height, width);
@@ -80,11 +82,13 @@ int	ft_select(int nb_list, char **list)
 			txt = tgetstr("nd", NULL);
 			tputs(txt, 0, tputs_putchar);
 		}
-		else if (buffer[2] == 0)
+		if (SPACE)
 		{
-			printf("ESC, on quitte !\n");
-			return (0);
+			txt = tgetstr("uc", NULL);
+			tputs(txt, 0, tputs_putchar);
 		}
+		if (ESCAPE)
+			return (0);
 	}
 	if (tcgetattr(0, &term) == -1)
 		return (-1);

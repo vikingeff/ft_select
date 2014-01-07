@@ -6,7 +6,7 @@
 #    By: gleger <gleger@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/31 19:03:08 by gleger            #+#    #+#              #
-#    Updated: 2014/01/07 13:36:36 by gleger           ###   ########.fr        #
+#    Updated: 2014/01/07 19:58:57 by gleger           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ FLAGS	= -Wall -Wextra -Werror -O3 -I ./includes
 LIB		= -L /usr/lib -ltermcap
 SRC		=	ft_stuff.c \
 			ft_select.c \
+			ft_memory.c \
 			main.c
 OBJ = $(SRC:.c=.o)
 
