@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 13:53:58 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/08 18:15:05 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/08 18:23:40 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct		s_link
 
 void	show_usage(void);
 void	make_list(int nb_link, char **list);
-int		ft_init_term(void);
+int		ft_init_term(struct termios *term);
 int		ft_reset_term(struct termios term);
 size_t	ft_strlen(const char *str);
 void	ft_putchar(const char c);
