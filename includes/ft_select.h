@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 13:53:58 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/07 19:58:56 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/08 18:15:05 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,24 @@
 # define DELETE	127
 # define BACKSPACE	2117294875
 
+typedef struct		s_link
+{
+	void			*data;
+	int				index;
+	struct s_data	*next;
+	struct s_data	*prev;
+}					t_link;
+
+void	show_usage(void);
+void	make_list(int nb_link, char **list);
+int		ft_init_term(void);
+int		ft_reset_term(struct termios term);
 size_t	ft_strlen(const char *str);
 void	ft_putchar(const char c);
-int tputs_putchar(int c);
+int 	tputs_putchar(int c);
 void	ft_putstr(const char *str);
 void	ft_putendl(const char *str);
-int	ft_select(int nb_list, char **list);
+int		ft_select(int nb_list, char **list);
 void	ft_print(int size, char ** list);
 void	ft_bzero(void *s, size_t n);
 

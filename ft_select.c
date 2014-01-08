@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 16:55:39 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/07 19:58:55 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/08 18:20:58 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,11 @@ void	ft_print(int size, char ** list)
 	}
 }
 
-int	ft_select(int nb_list, char **list)
+int	ft_init_term(struct termios *term)
 {
-	//pid_t	pid_f;
 	char	*txt;
-	struct termios	term;
-	char	buffer[3];
+	//struct termios	term;
 	char	buff_env[BUFF_SIZE];
-	int	height;
-	int	width;
 
 	if ((txt = getenv("TERM")) == NULL)
 		return (-1);
@@ -41,17 +37,41 @@ int	ft_select(int nb_list, char **list)
 	if (tgetent(buff_env, txt) < 1)
 		return (-1);
 	//printf("%s\n",buff_env);
-	if (tcgetattr(0, &term) == -1)
+	if (tcgetattr(0, term) == -1)
 		return (-1);
-	term.c_lflag &= ~(ICANON); // Met le terminal en mode canonique.
-	term.c_lflag &= ~(ECHO); // les touches tapées ne s'inscriront plus dans le terminal
-	term.c_cc[VMIN] = 1;
-	term.c_cc[VTIME] = 0;
+	term->c_lflag &= ~(ICANON); // Met le terminal en mode canonique.
+	term->c_lflag &= ~(ECHO); // les touches tapées ne s'inscriront plus dans le terminal
+	term->c_cc[VMIN] = 1;
+	term->c_cc[VTIME] = 0;
 	// On applique les changements :
-	if (tcsetattr(0, TCSADRAIN, &term) == -1)
+	if (tcsetattr(0, TCSADRAIN, term) == -1)
 		return (-1);
 	txt = tgetstr("cl", NULL);
 	tputs(txt, 0, tputs_putchar);
+	return (0);
+}
+
+int	ft_reset_term(struct termios term)
+{
+	if (tcgetattr(0, &term) == -1)
+		return (-1);
+	term.c_lflag = (ICANON | ECHO);
+	if (tcsetattr(0, 0, &term) == -1)
+		return (-1);
+}
+
+int	ft_select(int nb_list, char **list)
+{
+	//pid_t	pid_f;
+	char	*txt;
+	struct termios	term;
+	char	buffer[3];
+	//char	buff_env[BUFF_SIZE];
+	int	height;
+	int	width;
+
+	if ((height = ft_init_term(&term)) == -1)
+		return (-1);
 	ft_print(nb_list, list);
 	while (1)
 	{
@@ -90,9 +110,7 @@ int	ft_select(int nb_list, char **list)
 		if (ESCAPE)
 			return (0);
 	}
-	if (tcgetattr(0, &term) == -1)
+	if ((height = ft_reset_term(term)) == -1)
 		return (-1);
-	term.c_lflag = (ICANON | ECHO);
-	if (tcsetattr(0, 0, &term) == -1)
-		return (-1);
+	return (0);
 }
