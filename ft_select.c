@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 16:55:39 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/09 15:19:17 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/09 17:53:30 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ int	ft_init_term(struct termios *term)
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
 	// On applique les changements :
-	if (tcsetattr(0, TCSADRAIN, term) == -1)
+	if (tcsetattr(0, TCSANOW, term) == -1)
 		return (-1);
 	txt = tgetstr("cl", NULL);
 	tputs(txt, 0, tputs_putchar);
+	//tputs(tgetstr("vi", NULL), 1, tputs_putchar);
+	//tputs(tgetstr("ti", NULL), 1, tputs_putchar);
 	return (0);
 }
 
@@ -58,6 +60,8 @@ int	ft_reset_term(struct termios term)
 	term.c_lflag = (ICANON | ECHO);
 	if (tcsetattr(0, 0, &term) == -1)
 		return (-1);
+	tputs(tgetstr("ve", NULL), 1, tputs_putchar);
+	tputs(tgetstr("te", NULL), 1, tputs_putchar);
 	return (0);
 }
 
@@ -77,7 +81,7 @@ char	*ft_keycatch(void)
 	else if (RIGHT)
 		txt = tgetstr("nd", NULL);
 	else if (SPACE)
-		txt = tgetstr("uc", NULL);
+		txt = tgetstr("mr", NULL);
 	else if (ESCAPE)
 		return (NULL);
 	else
@@ -107,13 +111,16 @@ int	ft_select(int nb_list, char **list)
 		//read(0, buffer, 3);
 		//printf("%d - %d - %d\n", buffer[0], buffer[1], buffer[2]);
 		//printf("%d - %d\n", height, width);
+		//tputs(tgetstr("us", NULL), 1, tputs_putchar);
 		txt = ft_keycatch();
-		//tputs(tgetstr("vi", NULL), 1, tputs_putchar);
-		//tputs(tgetstr("ti", NULL), 1, tputs_putchar);
+
 		if (txt)
-			tputs(txt, 0, tputs_putchar);
+			tputs(txt, 1, tputs_putchar);
 		else
+		{
+			ft_reset_term(term);
 			return (-1);
+		}
 	}
 	if ((height = ft_reset_term(term)) == -1)
 		return (-1);

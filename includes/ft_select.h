@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 13:53:58 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/09 14:50:40 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/09 17:53:25 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ typedef struct		s_link
 {
 	void			*data;
 	int				index;
-	struct s_data	*next;
-	struct s_data	*prev;
+	int				select;
+	struct s_link	*next;
+	struct s_link	*prev;
 }					t_link;
 
 void	show_usage(void);
-void	make_list(int nb_link, char **list);
+t_link	*make_list(size_t nb_link, char **list);
+t_link	*ft_lstnew(const void *data, size_t data_size);
 int		ft_init_term(struct termios *term);
 int		ft_reset_term(struct termios term);
 char	*ft_keycatch(void);
