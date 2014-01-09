@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 16:55:39 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/08 18:23:41 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/09 15:19:17 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,31 @@ int	ft_reset_term(struct termios term)
 	term.c_lflag = (ICANON | ECHO);
 	if (tcsetattr(0, 0, &term) == -1)
 		return (-1);
+	return (0);
+}
+
+char	*ft_keycatch(void)
+{
+	char	*txt;
+	char	buffer[3];
+
+	ft_bzero(buffer, 3);
+	read(0, buffer, 3);
+	if (UP)
+		txt = tgetstr("up", NULL);
+	else if (DOWN)
+		txt = tgetstr("do", NULL);
+	else if (LEFT)
+		txt = tgetstr("le", NULL);
+	else if (RIGHT)
+		txt = tgetstr("nd", NULL);
+	else if (SPACE)
+		txt = tgetstr("uc", NULL);
+	else if (ESCAPE)
+		return (NULL);
+	else
+		ft_bzero(buffer, 3);
+	return (txt);
 }
 
 int	ft_select(int nb_list, char **list)
@@ -65,7 +90,7 @@ int	ft_select(int nb_list, char **list)
 	//pid_t	pid_f;
 	char	*txt;
 	struct termios	term;
-	char	buffer[3];
+	//char	buffer[3];
 	//char	buff_env[BUFF_SIZE];
 	int	height;
 	int	width;
@@ -78,37 +103,17 @@ int	ft_select(int nb_list, char **list)
 		//txt = getenv("TERM");
 		height = tgetnum ("li");
 		width = tgetnum ("co");
-		ft_bzero(buffer, 3);
-		read(0, buffer, 3);
+		//ft_bzero(buffer, 3);
+		//read(0, buffer, 3);
 		//printf("%d - %d - %d\n", buffer[0], buffer[1], buffer[2]);
 		//printf("%d - %d\n", height, width);
-		if (UP)
-		{
-			txt = tgetstr("up", NULL);
+		txt = ft_keycatch();
+		//tputs(tgetstr("vi", NULL), 1, tputs_putchar);
+		//tputs(tgetstr("ti", NULL), 1, tputs_putchar);
+		if (txt)
 			tputs(txt, 0, tputs_putchar);
-		}
-		if (DOWN)
-		{
-			txt = tgetstr("do", NULL);
-			tputs(txt, 0, tputs_putchar);
-		}
-		if (LEFT)
-		{
-			txt = tgetstr("le", NULL);
-			tputs(txt, 0, tputs_putchar);
-		}
-		if (RIGHT)
-		{
-			txt = tgetstr("nd", NULL);
-			tputs(txt, 0, tputs_putchar);
-		}
-		if (SPACE)
-		{
-			txt = tgetstr("uc", NULL);
-			tputs(txt, 0, tputs_putchar);
-		}
-		if (ESCAPE)
-			return (0);
+		else
+			return (-1);
 	}
 	if ((height = ft_reset_term(term)) == -1)
 		return (-1);

@@ -6,7 +6,7 @@
 #    By: gleger <gleger@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/31 19:03:08 by gleger            #+#    #+#              #
-#    Updated: 2014/01/07 19:58:57 by gleger           ###   ########.fr        #
+#    Updated: 2014/01/09 15:02:07 by gleger           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ LIB		= -L /usr/lib -ltermcap
 SRC		=	ft_stuff.c \
 			ft_select.c \
 			ft_memory.c \
+			ft_more.c \
+			ft_list.c \
 			main.c
 OBJ = $(SRC:.c=.o)
 

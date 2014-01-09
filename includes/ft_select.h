@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 13:53:58 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/08 18:23:40 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/09 14:50:40 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,21 @@ void	show_usage(void);
 void	make_list(int nb_link, char **list);
 int		ft_init_term(struct termios *term);
 int		ft_reset_term(struct termios term);
+char	*ft_keycatch(void);
 size_t	ft_strlen(const char *str);
 void	ft_putchar(const char c);
 int 	tputs_putchar(int c);
 void	ft_putstr(const char *str);
+void	ft_puterr(char *str);
 void	ft_putendl(const char *str);
+void	ft_putendl_fd(char const *str, int fd);
+void	ft_putstr_fd(char const *str, int fd);
+void	ft_putchar_fd(char c, int fd);
 int		ft_select(int nb_list, char **list);
 void	ft_print(int size, char ** list);
 void	ft_bzero(void *s, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_malloc(int size);
+void	ft_free(void *ptr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/04 15:00:33 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/08 18:23:44 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/09 14:50:39 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void	show_usage(void)
 {
-	ft_putendl("usage: ft_select [list of stuff ...]");
-}
-
-void	make_list(int nb_link, char **list)
-{
-	
+	ft_puterr("\033[0;31musage: \033[0;37mft_select [list of stuff ...]");
 }
 
 int		main(int argc, char **argv)
