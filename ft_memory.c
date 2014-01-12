@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 15:44:16 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/09 17:53:28 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/12 20:08:27 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		loop++;
 	}
 	return (dest);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int	size_s;
+	int	loop;
+	char	*str;
+
+	size_s = 0;
+	loop = 0;
+	size_s = ft_strlen(s1);
+	str = malloc(size_s * sizeof(char) + 1);
+	if (str == NULL)
+	{
+		free (str);
+		return (NULL);
+	}
+	while (loop < size_s)
+	{
+		*(str + loop) = *(s1 + loop);
+		loop++;
+	}
+	*(str + loop) = '\0';
+	return (str);
 }
 
 void	*ft_malloc(int size)

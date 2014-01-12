@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 16:55:39 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/09 17:53:30 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/12 20:08:20 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	ft_print(int size, char ** list)
 		ft_putendl(*(list + loop));
 		loop++;
 	}
+}
+
+void	make_menu(t_link *first_link)
+{
+	
 }
 
 int	ft_init_term(struct termios *term)
@@ -89,7 +94,8 @@ char	*ft_keycatch(void)
 	return (txt);
 }
 
-int	ft_select(int nb_list, char **list)
+//int	ft_select(int nb_list, char **list)
+void	ft_select(t_link *list_first)
 {
 	//pid_t	pid_f;
 	char	*txt;
@@ -101,7 +107,7 @@ int	ft_select(int nb_list, char **list)
 
 	if ((height = ft_init_term(&term)) == -1)
 		return (-1);
-	ft_print(nb_list, list);
+	//ft_print(nb_list, list);
 	while (1)
 	{
 		//txt = getenv("TERM");

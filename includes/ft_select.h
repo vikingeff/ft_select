@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 13:53:58 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/09 17:53:25 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/12 20:08:30 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 typedef struct		s_link
 {
-	void			*data;
+	char			*data;
 	int				index;
 	int				select;
 	struct s_link	*next;
@@ -43,7 +43,9 @@ typedef struct		s_link
 
 void	show_usage(void);
 t_link	*make_list(size_t nb_link, char **list);
-t_link	*ft_lstnew(const void *data, size_t data_size);
+t_link	*ft_lstnew(const char *data);//, size_t data_size);
+t_link	*ft_lstadd(const char *data,  t_link *prev);
+void	print_list(t_link *first_link);
 int		ft_init_term(struct termios *term);
 int		ft_reset_term(struct termios term);
 char	*ft_keycatch(void);
@@ -56,10 +58,12 @@ void	ft_putendl(const char *str);
 void	ft_putendl_fd(char const *str, int fd);
 void	ft_putstr_fd(char const *str, int fd);
 void	ft_putchar_fd(char c, int fd);
-int		ft_select(int nb_list, char **list);
+//int		ft_select(int nb_list, char **list);
+void	ft_select(t_link *list_first);
 void	ft_print(int size, char ** list);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strdup(const char *s1);
 void	*ft_malloc(int size);
 void	ft_free(void *ptr);
 
