@@ -6,12 +6,11 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/08 17:54:40 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/12 20:08:24 by gleger           ###   ########.fr       */
+/*   Updated: 2014/01/12 22:29:02 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
-#include <stdio.h>
 
 t_link	*make_list(size_t nb_link, char **list)
 {
@@ -25,6 +24,7 @@ t_link	*make_list(size_t nb_link, char **list)
 		if (loop == 1)
 		{
 			list_chain = ft_lstnew(*(list + loop));
+			list_chain->cursor = 1;
 			list_first = list_chain;
 		}
 		else
@@ -61,7 +61,8 @@ t_link	*ft_lstnew(const char *data)
 	link->next = NULL;
 	link->prev = NULL;
 	link->index = 0;
-	link->select = 0;
+	link->selected = 0;
+	link->cursor = 0;
 	return (link);
 }
 

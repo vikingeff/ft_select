@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_menu.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/04 15:00:33 by gleger            #+#    #+#             */
-/*   Updated: 2014/01/12 22:24:44 by gleger           ###   ########.fr       */
+/*   Created: 2014/01/12 21:09:19 by gleger            #+#    #+#             */
+/*   Updated: 2014/01/12 22:25:13 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-void	show_usage(void)
+t_link	*find_cursor(t_link *first_link)
 {
-	ft_puterr("\033[0;31musage: \033[0;37mft_select [list of stuff ...]");
+	while(first_link->cursor != 0)
+	{
+		first_link = first_link->next;
+	}
+	return (first_link);
 }
 
-int		main(int argc, char **argv)
+t_link	*find_first(t_link *random_link)
 {
-	t_link	*list_chain;
-
-	if (argc <= 1)
-		show_usage();
-	else
+	while(random_link->index != 0)
 	{
-		list_chain = make_list(argc, argv);
-		ft_select(list_chain);
+		random_link = random_link->next;
 	}
-	return (0);
+	return (random_link);
 }

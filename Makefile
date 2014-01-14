@@ -6,7 +6,7 @@
 #    By: gleger <gleger@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/31 19:03:08 by gleger            #+#    #+#              #
-#    Updated: 2014/01/09 15:02:07 by gleger           ###   ########.fr        #
+#    Updated: 2014/01/12 21:09:55 by gleger           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC		=	ft_stuff.c \
 			ft_memory.c \
 			ft_more.c \
 			ft_list.c \
+			ft_menu.c \
 			main.c
 OBJ = $(SRC:.c=.o)
 
