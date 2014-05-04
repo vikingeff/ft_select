@@ -6,13 +6,13 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 17:48:25 by gleger            #+#    #+#             */
-/*   Updated: 2014/04/29 10:07:21 by gleger           ###   ########.fr       */
+/*   Updated: 2014/05/04 13:58:32 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-void	ft_free_list(t_dlist *arg)
+void			ft_free_list(t_dlist *arg)
 {
 	t_dlist_node	*node;
 	int				i;
@@ -33,7 +33,7 @@ void	ft_free_list(t_dlist *arg)
 	free(arg);
 }
 
-void	ft_exit(t_dlist *arg, struct termios term)
+void			ft_exit(t_dlist *arg, struct termios term)
 {
 	if (arg != NULL)
 		ft_free_list(arg);
@@ -45,7 +45,7 @@ void	ft_exit(t_dlist *arg, struct termios term)
 	exit(0);
 }
 
-void	ft_exit_esc(struct termios term, char *read_char, t_dlist *arg)
+void			ft_exit_esc(struct termios term, char *read_char, t_dlist *arg)
 {
 	if (read_char[2] == 'C' || read_char[2] == 'D' || read_char[2] == 'A'
 			|| read_char[2] == 'B' || (read_char[2] == '3'
@@ -55,15 +55,20 @@ void	ft_exit_esc(struct termios term, char *read_char, t_dlist *arg)
 		ft_exit(arg, term);
 }
 
-void	ft_return(t_dlist *arg, struct termios term)
+void			ft_putflags(struct termios term)
+{
+	term.c_lflag = (ICANON | ECHO | ISIG | IEXTEN | ECHOE | ECHOK 
+		| ECHOKE | ECHOCTL);
+}
+
+void			ft_return(t_dlist *arg, struct termios term)
 {
 	int				i;
 	int				j;
 	t_dlist_node	*node;
 
 	tputs(tgetstr("te", NULL), 1, ft_putchar);
-	term.c_lflag = (ICANON | ECHO | ISIG | IEXTEN | ECHOE | ECHOK
-			| ECHOKE | ECHOCTL);
+	ft_putflags(term);
 	if (tcsetattr(0, 0, &term) == -1)
 		exit(-1);
 	i = 0;
