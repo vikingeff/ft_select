@@ -6,7 +6,7 @@
 /*   By: gleger <gleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 17:48:25 by gleger            #+#    #+#             */
-/*   Updated: 2014/05/04 13:58:32 by gleger           ###   ########.fr       */
+/*   Updated: 2014/05/04 14:10:09 by gleger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void			ft_exit_esc(struct termios term, char *read_char, t_dlist *arg)
 
 void			ft_putflags(struct termios term)
 {
-	term.c_lflag = (ICANON | ECHO | ISIG | IEXTEN | ECHOE | ECHOK 
-		| ECHOKE | ECHOCTL);
+	term.c_lflag = (ICANON | ECHO | ISIG | IEXTEN | ECHOE
+			| ECHOK | ECHOKE | ECHOCTL);
 }
 
 void			ft_return(t_dlist *arg, struct termios term)
